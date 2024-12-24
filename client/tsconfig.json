@@ -13,5 +13,13 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "module": "es2020", // or "node16"
+    "target": "es2020", // or higher
+    "skipLibCheck": true, // Optional: skips type checks in node_modules,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }

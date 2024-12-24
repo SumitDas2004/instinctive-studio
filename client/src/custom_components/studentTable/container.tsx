@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import CreateStudentForm from "./createStudent";
 import { useSelector } from "react-redux";
+import {RootState} from '../../redux/store.ts'
 
 
 export default function TableContainer({ studentFilterInput }) {
@@ -13,7 +14,7 @@ export default function TableContainer({ studentFilterInput }) {
   const cohortFilterContainer = React.useRef();
   const courseFilterContainer = React.useRef();
 
-  const students = useSelector((state) => state.student.students);
+  const students = useSelector((state: RootState) => state.student.students);
   return (
     <section className="p-4 bg-white rounded-xl mx-5 overflow-auto w-[96%]">
       <div className="flex justify-between mb-3 flex-wrap gap-1">
