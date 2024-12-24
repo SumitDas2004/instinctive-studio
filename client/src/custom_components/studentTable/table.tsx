@@ -34,7 +34,6 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 
 interface DataTableProps {
   columns: ColumnDef<Student>[];
@@ -44,13 +43,13 @@ interface DataTableProps {
   cohortFilterContainer: any;
 }
 
-export function DataTable<TData>({
+export function DataTable({
   columns,
   data,
   studentFilterInput,
   courseFilterContainer,
   cohortFilterContainer,
-}: DataTableProps<TData>) {
+}: DataTableProps) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -64,8 +63,9 @@ export function DataTable<TData>({
       columnFilters,
     },
   });
-  const cohorts = useSelector.withTypes<RootState>((state: any)=>state.course.cohorts)
-  const courses = useSelector.withTypes<RootState>((state: any)=>state.course.courses)
+  const cohorts = useSelector((state: any) => state.course.cohorts);
+  const courses = useSelector((state: any) => state.course.courses);
+  console.log(cohorts);
   return (
     <div className="overflow-auto">
       <div className="flex items-center ">
@@ -79,7 +79,9 @@ export function DataTable<TData>({
                 (table.getColumn("name")?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table.getColumn("name")?.setFilterValue(event.target.value.trim())
+                table
+                  .getColumn("name")
+                  ?.setFilterValue(event.target.value.trim())
               }
               className="bg-white py-5 px-9 outline-none border-none shadow-none rounded-xl w-full"
             />,
@@ -98,16 +100,18 @@ export function DataTable<TData>({
                 <SelectGroup>
                   <SelectLabel>Cohorts</SelectLabel>
                   <SelectItem value=" ">None</SelectItem>
-                  {
-                    cohorts.map((cohort: any)=><SelectItem key={cohort.name} value={cohort.name}>{cohort.name}</SelectItem>)
-                  }
+                  {cohorts.map((cohort: any) => (
+                    <SelectItem key={cohort.name} value={cohort.name}>
+                      {cohort.name}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>,
             cohortFilterContainer.current
           )}
 
-          {/* Course based filteration */}
+        {/* Course based filteration */}
         {courseFilterContainer &&
           courseFilterContainer.current &&
           createPortal(
@@ -119,9 +123,11 @@ export function DataTable<TData>({
                 <SelectGroup>
                   <SelectLabel>Course</SelectLabel>
                   <SelectItem value=" ">None</SelectItem>
-                  {
-                    courses.map((course: any)=><SelectItem key={course.name} value={course.name}>{course.name}</SelectItem>)
-                  }
+                  {courses.map((course: any) => (
+                    <SelectItem key={course.name} value={course.name}>
+                      {course.name}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>,
