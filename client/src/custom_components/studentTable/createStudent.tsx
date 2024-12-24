@@ -2,18 +2,18 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "../../components/ui/dialog";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import * as React from "react";
 import SelectionList from "../select";
-import { addStudent, getCohorts, getCourses } from "@/utils/api";
-import { Button } from "@/components/ui/button";
+import { addStudent, getCohorts, getCourses } from "../../utils/api";
+import { Button } from "../../components/ui/button";
 import { useDispatch } from "react-redux";
-import {addStudents} from '../../redux/studentSlice.js'
+import {addStudents} from '../../redux/studentSlice'
 import { Loader2 } from "lucide-react";
 
-export default function CreateStudentForm({setIsDialogOpen}) {
+export default function CreateStudentForm({setIsDialogOpen}: {setIsDialogOpen: any}) {
   const dispatch = useDispatch()
   // Stores the list of courses
   const [courses, setCourses] = React.useState([]);
@@ -36,10 +36,10 @@ export default function CreateStudentForm({setIsDialogOpen}) {
 
   React.useEffect(() => {
     getCourses().then((res) =>
-      setCourses(res.map((course) => ({ ...course, id: course.course_id, picture: course.taught_by.picture })))
+      setCourses(res.map((course: any) => ({ ...course, id: course.course_id, picture: course.taught_by.picture })))
     );
     getCohorts().then((res) =>
-      setCohorts(res.map((cohort) => ({ ...cohort, id: cohort.cohort_id })))
+      setCohorts(res.map((cohort: any) => ({ ...cohort, id: cohort.cohort_id })))
     );
     setName("")
     setCourse("")
@@ -92,7 +92,7 @@ export default function CreateStudentForm({setIsDialogOpen}) {
   );
 }
 
-const createStudent = async(student) => {
+const createStudent = async(student: { name: any; course: any; cohort: any; }) => {
   const data = {
     name: student.name,
     cohortId: student.cohort,

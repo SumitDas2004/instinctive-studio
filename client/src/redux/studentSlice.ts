@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const studentSlice = createSlice({
     initialState: {
@@ -6,7 +6,7 @@ const studentSlice = createSlice({
     }, 
     name: "STUDENT",
     reducers: {
-        addStudents: (state, action)=>{
+        addStudents: (state, action: PayloadAction<any[] | any>)=>{
             if(Array.isArray(action.payload))
                 state.students = [...state.students, ...action.payload]
             else
@@ -14,7 +14,7 @@ const studentSlice = createSlice({
         },
         deleteStudent: (state, action)=>{
             // Keeping all the students that do not match the given roll_number
-            state.students = state.students.filter(student=>student.roll_number!==action.payload)
+            state.students = state.students.filter((student: any)=>student.roll_number!==action.payload)
         }
     }
 })

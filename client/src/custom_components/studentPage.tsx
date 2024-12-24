@@ -1,9 +1,9 @@
 import * as React from 'react'
 import TableContainer from "./studentTable/container";
 import TopNavigationBar from "./topNavigationBar";
-import { getCohorts, getCourses, getStudents } from '@/utils/api';
+import { getCohorts, getCourses, getStudents } from '../utils/api';
 import { useDispatch } from 'react-redux';
-import {addStudents} from '../redux/studentSlice.js'
+import {addStudents} from '../redux/studentSlice'
 import {addCourses, addCohorts} from '../redux/courseSlice.js'
 
 

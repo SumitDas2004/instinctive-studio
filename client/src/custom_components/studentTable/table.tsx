@@ -20,9 +20,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../../components/ui/table";
 import { Student } from "./container";
-import { Input } from "@/components/ui/input";
+import { Input } from "../../components/ui/input";
 import { createPortal } from "react-dom";
 import {
   Select,
@@ -32,10 +32,11 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../../components/ui/select";
 import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
-interface DataTableProps<TData> {
+interface DataTableProps {
   columns: ColumnDef<Student>[];
   data: Student[];
   studentFilterInput: any;
@@ -63,8 +64,8 @@ export function DataTable<TData>({
       columnFilters,
     },
   });
-  const cohorts = useSelector(state=>state.course.cohorts)
-  const courses = useSelector(state=>state.course.courses)
+  const cohorts = useSelector.withTypes<RootState>((state: any)=>state.course.cohorts)
+  const courses = useSelector.withTypes<RootState>((state: any)=>state.course.courses)
   return (
     <div className="overflow-auto">
       <div className="flex items-center ">
@@ -98,7 +99,7 @@ export function DataTable<TData>({
                   <SelectLabel>Cohorts</SelectLabel>
                   <SelectItem value=" ">None</SelectItem>
                   {
-                    cohorts.map(cohort=><SelectItem key={cohort.name} value={cohort.name}>{cohort.name}</SelectItem>)
+                    cohorts.map((cohort: any)=><SelectItem key={cohort.name} value={cohort.name}>{cohort.name}</SelectItem>)
                   }
                 </SelectGroup>
               </SelectContent>
@@ -119,7 +120,7 @@ export function DataTable<TData>({
                   <SelectLabel>Course</SelectLabel>
                   <SelectItem value=" ">None</SelectItem>
                   {
-                    courses.map(course=><SelectItem key={course.name} value={course.name}>{course.name}</SelectItem>)
+                    courses.map((course: any)=><SelectItem key={course.name} value={course.name}>{course.name}</SelectItem>)
                   }
                 </SelectGroup>
               </SelectContent>

@@ -1,11 +1,9 @@
-import { Input } from "@/components/ui/input";
 import { Bell, SearchIcon, SlidersHorizontal } from "lucide-react";
-import * as React from "react";
 import { HelpCircle } from "@styled-icons/boxicons-regular/HelpCircle";
 import { MessageSquareOutline } from "@styled-icons/evaicons-outline/MessageSquareOutline";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger } from "../components/ui/sidebar";
 
-export default function TopNavigationBar({ studentFilterInput }) {
+export default function TopNavigationBar({ studentFilterInput }: {studentFilterInput: any}) {
   return (
     <nav className="flex py-4 px-5 lg:justify-between w-full flex-col-reverse lg:flex-row items-center gap-2">
       {/* Student name filter */}

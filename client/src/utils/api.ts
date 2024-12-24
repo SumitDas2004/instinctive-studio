@@ -42,7 +42,6 @@ export const deleteStudent = async(roll_number: string)=>{
         const raw = await fetch(`${import.meta.env.VITE_SERVER}/student/${roll_number}`, {
             method: 'DELETE',
         })
-        const res = await raw.json()
 
         if(raw.status>=200 && raw.status<300){
             
